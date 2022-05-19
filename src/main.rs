@@ -64,10 +64,6 @@ fn main() {
     }
 }
 
-fn make_number(num_str: String) -> Token {
-    Token::new(num_str, TokenType::Number)
-}
-
 fn tokenize(source: &str) -> Vec<Token> {
     let source_chars: Vec<_> = source.chars().collect();
 
