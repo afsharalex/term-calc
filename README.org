@@ -1,0 +1,6 @@
+#+TITLE: Term Calc
+#+AUTHOR: Alex Afshar
+#+LANGUAGE: en
+
+* Summary
+Term Calc is a terminal calculator similar to the famous `dc` command line application with a few added bells and whistles.
