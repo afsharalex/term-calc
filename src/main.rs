@@ -1,14 +1,33 @@
 use std::io::{self, stdout, Write};
 use std::fmt;
 
+#[allow(dead_code)]
+#[derive(Debug)]
+enum TokenType {
+    Plus,
+    Minus,
+    Star,
+    ForwardSlash,
+    Number,
+}
+
 struct Token {
-    token_type: String,
+    token_type: TokenType,
     literal: String,
+}
+
+impl Token {
+    fn new(literal: String, token_type: TokenType) -> Self {
+        Self{
+            token_type,
+            literal
+        }
+    }
 }
 
 impl fmt::Display for Token {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "<{}: {}>", self.token_type, self.literal)
+        write!(f, "<{:?}: {}>", self.token_type, self.literal)
     }
 }
 
@@ -46,10 +65,7 @@ fn main() {
 }
 
 fn make_number(num_str: String) -> Token {
-    return Token{
-        token_type: "number".to_string(),
-        literal: num_str,
-    };
+    Token::new(num_str, TokenType::Number)
 }
 
 fn tokenize(source: &str) -> Vec<Token> {
