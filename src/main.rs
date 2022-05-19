@@ -89,17 +89,43 @@ fn tokenize(source: &str) -> Vec<Token> {
 
                 let mut num_str: String = String::from(c);
 
-                if source_chars[i].is_digit(10) && i < source_chars.len() - 1 {
-                    println!("Incoming digit: {}", source_chars[i]);
+                let mut has_period = false;
 
-                    while source_chars[i].is_digit(10) && i < source_chars.len() - 1 {
-                        num_str.push_str(&String::from(source_chars[i]));
-                        i += 1;
-                    }
+                while i < source_chars.len() - 1 && (source_chars[i].is_digit(10) || source_chars[i] == '.') {
+                    if source_chars[i] == '.' {
+                        if has_period == false {
+                            has_period = true;
+                        } else {
+                            // TODO: Multiple periods, what to do - what to do....?
+                            // That's an error...
+                            // Or should the default be to ignore it..?
+                            i += 1;
+                            continue;
+                        }
+                    } 
 
-                    println!("Got: {}", num_str);
-                    tokens.push(make_number(num_str));
+                    num_str.push_str(&String::from(source_chars[i]));
+                    i += 1;
                 }
+
+                println!("Got: {}", num_str);
+                tokens.push(Token::new(num_str, TokenType::Number));
+            },
+            '+' => {
+                println!("Found PLUS");
+                tokens.push(Token::new("+".to_string(), TokenType::Plus));
+            },
+            '-' => {
+                println!("Found MINUS");
+                tokens.push(Token::new("-".to_string(), TokenType::Minus));
+            },
+            '*' => {
+                println!("Found STAR");
+                tokens.push(Token::new("*".to_string(), TokenType::Star));
+            },
+            '/' => {
+                println!("Found FORWARD_SLASH");
+                tokens.push(Token::new("/".to_string(), TokenType::ForwardSlash));
             },
             _ => continue,
         }
