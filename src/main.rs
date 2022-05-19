@@ -1,7 +1,6 @@
 use std::io::{self, stdout, Write};
 use std::fmt;
 
-#[allow(dead_code)]
 #[derive(Debug)]
 enum TokenType {
     Plus,
@@ -27,7 +26,7 @@ impl Token {
 
 impl fmt::Display for Token {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "<{:?}: {}>", self.token_type, self.literal)
+        write!(f, "<|{:?}: {}|>", self.token_type, self.literal)
     }
 }
 
