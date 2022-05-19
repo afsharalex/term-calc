@@ -1,0 +1,15 @@
+[package]
+name = "term-calc"
+authors = ["Alex Afshar <contact@alexafshar.com>"]
+version = "0.1.0"
+edition = "2021"
+description = """
+Term Calc is a terminal calculator, similar to the famous 'dc' command with a few more bells and whistles.
+"""
+license = "MIT"
+
+[[bin]]
+name = "tc"
+path = "src/main.rs"
+
+[dependencies]
